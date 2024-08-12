@@ -7,11 +7,12 @@ def download_video():
     try:
         url = URL.get()
         ytObj = YouTube(url)
-        video = ytObj.streams.get_highest_resolution()
+        video = ytObj.streams.get_audio_only()
         video.download()
         print("Download Complete!")
     except Exception as e:
         print(e)
+
 #SYSTEM SETUP
 ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("blue")
