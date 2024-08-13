@@ -1,15 +1,23 @@
+#IMPORTS
+import yt_dlp 
 import tkinter as tk
 import customtkinter as ctk
-from pytube import YouTube
 
-
+#DOWNLOAD FUNCTION
 def download_video():
     try:
-        url = URL.get()
-        ytObj = YouTube(url)
-        video = ytObj.streams.get_audio_only()
-        video.download()
-        print("Download Complete!")
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'outtmpl': '%(title)s.%(ext)s',
+            # 'postprocessors': [{
+            #     'key': 'FFmpegExtractAudio',
+            #     'preferredcodec': 'mp3',
+            #     'preferredquality': '192',
+            # }],
+            # 'cookiesfrombrowser': 'chrome',
+        }
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([URL.get()])
     except Exception as e:
         print(e)
 
