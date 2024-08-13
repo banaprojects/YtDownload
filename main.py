@@ -1,31 +1,22 @@
-#IMPORTS
+# #IMPORTS
 import yt_dlp 
 import tkinter as tk
 import customtkinter as ctk
 import os
 
-#DOWNLOAD FUNCTION
-def download_video():
+def download_video(url):
     try:
-        ydl_opts = {
-            'format': 'best',
-            'outtmpl': '%(title)s.%(ext)s',
-        }
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([URL.get()])
+        username = 'cyzterance06@gmail.com'
+        password = 'M0onlightgarden,06'
+        
+        cmd = f"yt-dlp -u {username} -p {password} -f b \"{url}\""
+        os.system(cmd)
     except Exception as e:
         print(e)
 
-def download_audio():
-    try:
-        ydl_opts = {
-            'format': 'bestaudio',
-            'outtmpl': '%(title)s.%(ext)s',
-        }
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            ydl.download([URL.get()])
-    except Exception as e:
-        print(e)
+# url = input("Enter URL: ")
+# download_video(url)
+
 
 #SYSTEM SETUP
 ctk.set_appearance_mode("System")
@@ -45,11 +36,11 @@ link = ctk.CTkEntry(app, placeholder_text="Enter URL", width=350, height=40, tex
 link.pack()
 
 #Download Btn
-download = ctk.CTkButton(app, text="Download Video", command=download_video)
+download = ctk.CTkButton(app, text="Download Video", command=lambda:download_video(URL.get()))
 download.pack(padx=10, pady=10)
-download = ctk.CTkButton(app, text="Downoad Audio", command=download_audio)
-download.pack(padx=10, pady=10)
+# download = ctk.CTkButton(app, text="Download Audio", command=download_audio(URL.get()))
+# download.pack(padx=10, pady=10)
 
 
-#RUN APP
+# RUN APP
 app.mainloop()
